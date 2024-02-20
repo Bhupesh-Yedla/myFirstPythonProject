@@ -1,5 +1,6 @@
+import json
 import unittest
-from myModules import SpecialBlaException, my_range, parseInt, sun_angle, areDronesConnected, prettyCSVTable, longestSubstring
+from myModules import SpecialBlaException, formatJson, my_range, parseInt, sun_angle, areDronesConnected, prettyCSVTable, longestSubstring
 
 class TestMyScenarios(unittest.TestCase):
 
@@ -29,9 +30,18 @@ class TestMyScenarios(unittest.TestCase):
         except SpecialBlaException as e:
             print("SpecialBlaException:", e)
     
+    @unittest.skip
     def test5_my_range(self):
         for i in my_range(3):
             print(i)
+
+    @unittest.skip
+    def test6_format_json(self):
+        filepath = formatJson("Jsonfile.json")
+
+        with open(filepath, 'r') as file:
+            json_content = file.read()
+            print(json_content)
     
 
 if __name__ == '__main__':

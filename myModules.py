@@ -1,3 +1,4 @@
+import json
 from prettytable import PrettyTable
 
 # check whether sun can be seen when input certain time
@@ -116,6 +117,18 @@ def my_range(num):
         yield i
         i+=1
     
+
+def formatJson(filepath):
+
+    with open(filepath,'r') as file:
+        json_content = file.read()
+
+    dataJson = json.loads(json_content)
+    dataJson['a']['b']=2
+
+    with open(filepath, 'w') as file:
+        result = json.dump(dataJson, file, indent=4)
     
+    return filepath
 
 
