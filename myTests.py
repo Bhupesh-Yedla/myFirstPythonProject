@@ -1,5 +1,6 @@
 import json
 import unittest
+from ApiFramework import CSVFormatter, KVFormatter, SyslogFormatter
 from TicTacToe import OCell, TicTacToe, XCell
 from myModules import (
     SpecialBlaException,
@@ -66,7 +67,8 @@ class TestMyScenarios(unittest.TestCase):
         with open(filepath, "r") as file:
             json_content = file.read()
             print(json_content)
-
+    
+    @unittest.skip
     def test7_tictactoe(self):
         referee = TicTacToe([OCell().value+OCell().value+XCell().value,XCell().value+XCell().value+OCell().value,OCell().value+XCell().value+XCell().value])
         result = referee.checkio()
@@ -75,6 +77,34 @@ class TestMyScenarios(unittest.TestCase):
             print("it's a draw")
         else:
             print("Winner is: "+result)
+            
+    @unittest.skip
+    def test8_api_framework(self):
+        json_data = {
+                    "className": "Class 1A",
+                    "year": 2022,
+                     "phoneNumber": None,
+                    "active": True,
+                    "homeroomTeacher": {"firstName": "Richard", "lastName": "Roe"},
+                    "members": [
+                            {"firstName": "Jane", "lastName": "Doe"},
+                            {"firstName": "Jinny", "lastName": "Roe"},
+                            {"firstName": "Johnny", "lastName": "Roe"},
+                                ]
+                    } 
+        
+        csv_formatter  = CSVFormatter(json_data)
+        csv_body = csv_formatter.prepare_body()
+
+        syslog_formatter = SyslogFormatter(json_data)
+        syslog_body = syslog_formatter.prepare_body()
+
+        kv_formatter = KVFormatter(json_data)
+        kv_body = kv_formatter.prepare_body()
+
+        print("\nCSV Body: \n"+csv_body)
+        print("\nSyslog Body: \n"+syslog_body)
+        print("\nKV Body: \n"+kv_body)
 
 if __name__ == "__main__":
     unittest.main()

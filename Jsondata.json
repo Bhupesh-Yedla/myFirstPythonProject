@@ -1,0 +1,12 @@
+{
+    "className": "Class 1A",
+    "year": 2022,
+    "phoneNumber": null,
+    "active": true,
+    "homeroomTeacher": {"firstName": "Richard", "lastName": "Roe"},
+    "members": [
+        {"firstName": "Jane", "lastName": "Doe"},
+        {"firstName": "Jinny", "lastName": "Roe"},
+        {"firstName": "Johnny", "lastName": "Roe"},
+    ]
+}
