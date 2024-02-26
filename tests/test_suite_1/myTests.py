@@ -1,8 +1,8 @@
 import json
 import unittest
-from ApiFramework import CSVFormatter, KVFormatter, SyslogFormatter
-from TicTacToe import OCell, TicTacToe, XCell
-from myModules import (
+from pages.ApiFramework import CSVFormatter, KVFormatter, SyslogFormatter
+from pages.TicTacToe import OCell, TicTacToe, XCell
+from pages.myModules import (
     SpecialBlaException,
     formatJson,
     my_range,

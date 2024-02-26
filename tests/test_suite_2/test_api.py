@@ -1,5 +1,6 @@
 import pytest
 import requests
+import allure
 from assertpy import assert_that
 
 
@@ -10,7 +11,8 @@ class TestUsersAPI:
     def setup(self):
         print("\nSetup before tests")
 
-
+    @allure.title("Get all users from reqres database")
+    @allure.description("Retrieve all the users from the reqres.in")
     def test_get_all_users(self):
         r = requests.get(f"{self.baseurl}/api/users?page=2")
         assert_that(r.status_code).is_equal_to(200)
@@ -18,7 +20,7 @@ class TestUsersAPI:
         print(r.status_code)
         print(r.content)
 
-
+    @allure.step("get single user step")
     def test_get_single_user(self):
         user_id = 2
         r = requests.get(f"{self.baseurl}/api/users/{user_id}")
@@ -38,6 +40,8 @@ class TestUsersAPI:
         assert_that(r.json()).contains_key("id")
         assert_that(r.json()).contains_key("job").contains_value("leader")
 
+    @allure.title("Using pytest parametrize")
+    @allure.step("Nested step with id={id}, name={first_name}")
     @pytest.mark.parametrize("id, first_name",[(2,"IT"),(3,"Restaurant Manager")])
     def test_update_user_job(self,id, first_name):
         url = f"{self.baseurl}/api/users/{id}"
@@ -75,6 +79,7 @@ class TestUsersAPI:
         print(r.content)
         assert_that(r.status_code).is_equal_to(400)
 
+    @pytest.mark.xfail(reason="user not exists")
     def test_get_non_existent_user(self):
         url = f"{self.baseurl}/api/unknown/23"
         r = requests.get(url)
