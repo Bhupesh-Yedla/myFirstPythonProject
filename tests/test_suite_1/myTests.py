@@ -5,6 +5,7 @@ from pages.TicTacToe import OCell, TicTacToe, XCell
 from pages.myModules import (
     SpecialBlaException,
     formatJson,
+    matrixSum,
     my_range,
     parseInt,
     sun_angle,
@@ -78,8 +79,27 @@ class TestMyScenarios(unittest.TestCase):
         else:
             print("Winner is: "+result)
             
+    
     @unittest.skip
-    def test8_api_framework(self):
+    def test8_matrix_sum(self):
+        matrix = []
+        while True:
+            row = input().split()
+
+            if row[0] == "end":
+                break
+            matrix.append(row)
+        
+        result = matrixSum(matrix)
+
+        if result:
+            for row in result:
+                print(row)
+        else:
+            print("Inacceptable matrix input")
+    
+    @unittest.skip
+    def test9_api_framework(self):
         json_data = {
                     "className": "Class 1A",
                     "year": 2022,

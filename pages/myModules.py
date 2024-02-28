@@ -140,3 +140,46 @@ def formatJson(filepath):
         result = json.dump(dataJson, file, indent=4)
 
     return filepath
+
+
+def matrixSum(matrix):
+
+    result_matrix = [[0 for _ in range(len(matrix[0]))] for _ in range(len(matrix))]
+
+    if isMatrixValid(matrix) == True:
+        for row in range(len(matrix)):
+            for col in range(len(matrix[row])):
+
+                if row - 1 < 0:
+                    top = matrix[len(matrix) - 1][col]
+                else:
+                    top = matrix[row - 1][col]
+                if col - 1 < 0:
+                    left = matrix[row][len(matrix[row]) - 1]
+                else:
+                    left = matrix[row][col - 1]
+                if col + 1 > len(matrix[row]) - 1:
+                    right = matrix[row][0]
+                else:
+                    right = matrix[row][col + 1]
+                if row + 1 > len(matrix) - 1:
+                    bottom = matrix[0][col]
+                else:
+                    bottom = matrix[row + 1][col]
+
+                result = int(left) + int(right) + int(top) + int(bottom)
+                result_matrix[row][col] = result
+        return result_matrix
+    else:
+        return False
+
+
+def isMatrixValid(matrix):
+    if not matrix:
+        return False
+    row_length = len(matrix[0])
+    for row in matrix:
+        if len(row) != row_length:
+            return False
+
+    return True
